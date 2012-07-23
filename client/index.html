@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>King of the hill</title>
+
+    <script src="lib/socket.io.js"></script>
+    <script src="client.js"></script>
+
+    <style>
+      canvas {border: 1px black solid;}
+    </style>
+  </head>
+  <body>
+
+    <canvas id="canvas" width="640" height="480">
+    </canvas>
+
+    <button onclick="join()">join</button>
+
+    <script>
+      function join() {
+        socket.emit('join');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+Multiplayer HTML5 King of the Hill
+
+Server manages position and facing of each player.
+
+The game starts when 2 clients connect.
+When additional client connects, server sends game state. Server sends updates
+to each client whenever client connects, leaves, or makes action. Server and
+client maintain whole game state. Periodically send entire state to all clients.
+
+## Client -> Server
+There are only two game related events that client can send to server - move
+and spin. In addition, client can send join which includes a player name:
+
+### join
+{
+  'name': 'Joey'
+}
+
+## Server -> Client
+
+Server forwards client events to other clients, so sends the same move, spin,
+and join events, with playerId attached to all of them.
+
+In addition, server sends whole state of game
+
+### state
+
+{
+  'players': {
+    1: {
+      'name': 'Joey',
+      'x': 20,
+      'y': 25,
+      'angle': 70,
+      'score': 100,
+      'mode': 'move'|'spin'
+    }, ...
+  }
+  'king': 1
+}
