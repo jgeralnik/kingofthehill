@@ -26,15 +26,16 @@ In addition, server sends whole state of game
 ### state
 
 {
-  'players': {
+  players: {
     1: {
-      'name': 'Joey',
-      'x': 20,
-      'y': 25,
-      'angle': 70,
-      'score': 100,
-      'mode': 'move'|'spin'
+      name: 'Joey',
+      x: 20,
+      y: 25,
+      angle: 70,
+      score: 100,
+      mode: 'move'|'spin',
     }, ...
   }
-  'king': 1
+  king: 1
+  timestamp: ...
 }
