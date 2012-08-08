@@ -25,7 +25,7 @@ io.sockets.on('connection', function(socket){
     playerId = address.address + ":" + address.port
 
     console.log('user', playerId, 'joined')
-    
+
     var data = {}
     data.playerId = playerId
     socket.broadcast.emit('join', data)

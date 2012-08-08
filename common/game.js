@@ -27,8 +27,7 @@
     }
 
     // If nobody has crown, give crown to first player to reach middle
-    if(this.state.king == null)
-    {
+    if(this.state.king == null) {
       //TODO
     }
 
@@ -40,15 +39,15 @@
         if(i < j && p1.intersects(p2)){
           p1.lastHit = j;
           p2.lastHit = i;
-          console.log(p1.name + " collides with " + p2.name)
-            lastHit = j;
+          console.log(p1.name + " collides with " + p2.name);
+          lastHit = j;
           this.handleCollision_(p1, p2);
         }
       }
 
       // Check if out of bounds
       if(!this.inBounds(p1)){
-        console.log("Out of bounds")
+        console.log("Out of bounds");
         this.respawn(p1);
         if(newState.king == i)
           newState.king = p1.lastHit;
@@ -58,8 +57,9 @@
     }
 
     // Give points to king
-    if(newState.king != null)
+    if(newState.king != null) {
       newState.players[newState.king].score++;
+    }
 
     // Victory conditions!
     // TODO
@@ -83,8 +83,9 @@
   }
 
   Game.prototype.updateEvery = function(interval, skew) {
-    if(!skew)
+    if(!skew){
       skew = 0;
+    }
 
     var lastUpdate = (new Date()).valueOf() - skew;
     var that = this;
@@ -109,8 +110,9 @@
 
   Game.prototype.playerCount = function() {
     var result = 0;
-    for (var i in this.state.players)
+    for (var i in this.state.players){
       result++;
+    }
     return result;
   }
 
@@ -131,9 +133,11 @@
 
   Game.prototype.respawn = function(player){
     var pos = 0;
-    for(var p in this.state.players)
-      if(p < player.id)
+    for(var p in this.state.players){
+      if(p < player.id){
         pos++;
+      }
+    }
     player.resetPosition(pos);
   }
 
@@ -143,7 +147,8 @@
     this.x     = params.x;
     this.y     = params.y;
     this.angle = params.angle;
-    this.mode  = params.mode || "spin";
+    this.mode  = params.mode  || "spin";
+    this.score = params.score || 0;
   }
 
   Player.RADIUS  = 20;
@@ -182,18 +187,13 @@
 
   Player.prototype.computeState = function(delta){
     var nextPos = new Player(this.toJSON());
-    if(nextPos.mode == "spin")
-    {
+    if(nextPos.mode == "spin") {
       nextPos.angle += Player.ANGLE_V * delta;
-    }
-    else if(nextPos.mode == "move")
-    {
+    } else if(nextPos.mode == "move") {
       nextPos.x += Player.SPACE_V * delta * Math.cos(nextPos.angle);
-      //Moving y up is subtraction
+        //Moving y up is subtraction
       nextPos.y -= Player.SPACE_V * delta * Math.sin(nextPos.angle);
-    }
-    else
-    {
+    } else {
       console.log("Invalid mode", nextPos.mode);
     }
     return nextPos;
@@ -201,9 +201,11 @@
 
   Player.prototype.toJSON = function(){
     result = {};
-    for(var prop in this)
-      if(this.hasOwnProperty(prop))
+    for(var prop in this){
+      if(this.hasOwnProperty(prop)){
         result[prop] = this[prop];
+      }
+    }
     return result;
   }
 
@@ -215,11 +217,7 @@
     this.mode = "move";
   }
 
-
-  //TODO: spin,move
-  //Save, Load
-  //Player class
-  //Exports
+  //TODO: Save, Load
 
   exports.Game   = Game;
   exports.Player = Player;
